@@ -14,7 +14,7 @@
     'category': 'Tutorials/AwesomeGallery',
     'installable': True,
     'depends': ['web', 'contacts'],
-    'data': [
+    'demo': [
         'views/views.xml',
     ],
     'assets': {
