@@ -21,17 +21,8 @@ class RealEstateProperty(models.Model):
         required=True,
         default='new',
     )
-    type = fields.Selection(
-        string="Type",
-        selection=[
-            ('house', "House"),
-            ('apartment', "Apartment"),
-            ('office', "Office Building"),
-            ('retail', "Retail Space"),
-            ('warehouse', "Warehouse"),
-        ],
-        required=True,
-        default='house',
+    type_id = fields.Many2one(
+        string="Type", comodel_name='real.estate.property.type', ondelete='restrict', required=True
     )
     selling_price = fields.Float(
         string="Selling Price", help="The selling price excluding taxes.", required=True

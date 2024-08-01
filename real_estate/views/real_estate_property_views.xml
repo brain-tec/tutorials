@@ -21,7 +21,7 @@
             <list>
                 <field name="name"/>
                 <field name="state"/>
-                <field name="type"/>
+                <field name="type_id"/>
                 <field name="selling_price"/>
                 <field name="availability_date"/>
                 <field name="floor_area" optional="show"/>
@@ -50,7 +50,7 @@
                     </div>
                     <group>
                         <group string="Listing Information">
-                            <field name="type"/>
+                            <field name="type_id"/>
                             <field name="selling_price"/>
                             <field name="availability_date"/>
                             <field name="active"/>
@@ -105,7 +105,7 @@
 
                 <!-- Group by -->
                 <filter name="group_by_state" context="{'group_by': 'state'}"/>
-                <filter name="group_by_type" context="{'group_by': 'type'}"/>
+                <filter name="group_by_type" context="{'group_by': 'type_id'}"/>
             </search>
         </field>
     </record>
