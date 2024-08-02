@@ -11,6 +11,7 @@
         <field name="bedrooms">5</field>
         <field name="has_garden">True</field>
         <field name="has_garage">True</field>
+        <field name="seller_id" ref="real_estate.amyfromthevideos"/>
     </record>
 
     <record id="real_estate.loft" model="real.estate.property">
@@ -24,6 +25,7 @@
         <field name="bedrooms">3</field>
         <field name="has_garden">False</field>
         <field name="has_garage">True</field>
+        <field name="seller_id" ref="real_estate.antony_petisuix"/>
     </record>
 
     <record id="real_estate.mixed_use_commercial" model="real.estate.property">
@@ -37,6 +39,7 @@
         <field name="bedrooms">0</field>
         <field name="has_garden">False</field>
         <field name="has_garage">False</field>
+        <field name="seller_id" ref="real_estate.bafien_carpink"/>
     </record>
 
 </odoo>

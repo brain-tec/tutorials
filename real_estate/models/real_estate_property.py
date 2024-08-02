@@ -36,3 +36,5 @@ class RealEstateProperty(models.Model):
     bedrooms = fields.Integer(string="Number of Bedrooms", default=2)
     has_garden = fields.Boolean(string="Garden")
     has_garage = fields.Boolean(string="Garage")
+    seller_id = fields.Many2one(string="Seller", comodel_name='res.partner', required=True)
+    salesperson_id = fields.Many2one(string="Salesperson", comodel_name='res.users')
