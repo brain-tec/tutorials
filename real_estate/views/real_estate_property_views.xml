@@ -62,13 +62,22 @@
                             <field name="has_garage"/>
                         </group>
                     </group>
-                    <separator string="Description"/>
-                    <field
-                        name="description"
-                        nolabel="1"
-                        colspan="2"
-                        placeholder="Write a description about this property."
-                    />
+                    <notebook>
+                        <page string="Description">
+                            <field
+                                name="description"
+                                placeholder="Write a description about this property."
+                            />
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <group>
+                                    <field name="seller_id"/>
+                                    <field name="salesperson_id"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
