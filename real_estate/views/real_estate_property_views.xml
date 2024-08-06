@@ -60,6 +60,11 @@
                             <field name="bedrooms"/>
                             <field name="has_garden"/>
                             <field name="has_garage"/>
+                            <field
+                                name="tag_ids"
+                                widget="many2many_tags"
+                                options="{'color_field': 'color', 'no_quick_create': True, 'no_create_edit': True}"
+                            />
                         </group>
                     </group>
                     <notebook>
