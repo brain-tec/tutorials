@@ -1,9 +1,18 @@
-import { Component } from "@odoo/owl";
+import { Component, useState } from "@odoo/owl";
 
 export class Card extends Component {
     static template = "awesome_owl.Card";
     static props = {
-        title: String,
-        content: String,
+        slots: Object,
     };
+
+    setup() {
+        this.state = useState({
+            folded: false,
+        });
+    }
+
+    fold() {
+        this.state.folded = !this.state.folded;
+    }
 }

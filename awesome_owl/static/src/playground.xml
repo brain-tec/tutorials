@@ -12,8 +12,18 @@
             <div>The sum is: <t t-esc="sum"/></div>
         </div>
         <div>
-            <Card title="'card 1'" content="str1"/>
-            <Card title="'card 2'" content="str2"/>
+            <Card>
+                <t t-set-slot="title">
+                   slot title 1
+                </t>
+                adsfdsaf <button>button</button>
+            </Card>
+            <Card>
+                <t t-set-slot="title">
+                   slot title 2
+                </t>
+                <Counter value="values[0]" onChange.bind="() => this.incrementValue(0)"/>
+            </Card>
         </div>
         <TodoList />
     </t>
