@@ -1,14 +1,33 @@
-import { Component, useState } from "@odoo/owl";
+import { Component, useState, useRef, onMounted } from "@odoo/owl";
 import { TodoItem } from "./todo_item";
+
+function useAutofocus(refName) {
+    const ref = useRef(refName);
+    onMounted(() => {
+        ref.el.focus();
+    });
+}
 
 export class TodoList extends Component {
     static template = "awesome_owl.TodoList";
     static components = { TodoItem };
 
     setup() {
-        this.todos = useState([
-            { id: 2, description: "write tutorial", isCompleted: true },
-            { id: 3, description: "buy milk", isCompleted: false },
-        ]);
+        useAutofocus("inputref");
+        this.todos = useState([]);
+    }
+
+    addTodo(ev) {
+        if (ev.keyCode === 13) {
+            if (!ev.target.value.trim()) {
+                return;
+            }
+            this.todos.push({
+                id: this.todos.length + 1,
+                description: ev.target.value,
+                isCompleted: false,
+            });
+            ev.target.value = "";
+        }
     }
 }
