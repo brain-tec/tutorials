@@ -9,10 +9,18 @@ export class Playground extends Component {
     setup() {
         this.str1 = "<div class='text-primary'>some content</div>";
         this.str2 = markup("<div class='text-primary'>some content</div>");
-        this.sum = useState({ value: 2 });
+        this.values = useState([1,2,3,4,5,6,7,8,9]);
     }
 
-    incrementSum() {
-        this.sum.value++;
+    get sum() {
+        let sum = 0;
+        for (let val of this.values) {
+            sum += val;
+        }
+        return sum;
+    }
+
+    incrementValue(index) {
+        this.values[index]++;
     }
 }

@@ -4,9 +4,12 @@
     <t t-name="awesome_owl.playground">
         <div class="p-3">
             hello world
-            <Counter onChange.bind="incrementSum" />
-            <Counter onChange.bind="incrementSum" />
-            <div>The sum is: <t t-esc="sum.value"/></div>
+            <div>
+            <t t-foreach="values" t-as="value" t-key="value_index">
+                <Counter value="value" onChange.bind="() => this.incrementValue(value_index)" />
+            </t>
+            </div>
+            <div>The sum is: <t t-esc="sum"/></div>
         </div>
         <div>
             <Card title="'card 1'" content="str1"/>
