@@ -2,7 +2,7 @@
     // Green underline on active nav items
     .navbar-light .navbar-nav .show > .nav-link,
     .navbar-light .navbar-nav .nav-link.active {
-        border-bottom: 2px solid o-color('o-color-3');
+        border-bottom: 2px solid o-color('o-color-1');
     }
     // Arrow for the collapsable nav items
     #top_menu_collapse .dropdown-toggle::after {
@@ -19,7 +19,7 @@
         height: 18px;
         width: 18px;
         border-radius: 99px;
-        background-color: o-color('o-color-3') !important;
+        background-color: o-color('o-color-1') !important;
         color: o-color('black') !important;
     }
     // Centre logo

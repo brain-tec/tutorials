@@ -24,7 +24,7 @@ const MouseFollower = publicWidget.Widget.extend({
 
         // Create the Follower
         this.follower = document.createElement('div');
-        this.follower.setAttribute('class', 'x_mouse_follower o_not_editable position-fixed rounded-circle bg-o-color-3 opacity-50 translate-middle pe-none');
+        this.follower.setAttribute('class', 'x_mouse_follower o_not_editable position-fixed rounded-circle bg-o-color-1 opacity-50 translate-middle pe-none');
         this.el.querySelector('#top + main').append(this.follower);
 
         return this._super(...arguments);

@@ -24,6 +24,10 @@
         <xpath expr="//div[hasclass('products_header')]" position="attributes">
             <attribute name="class" add="justify-content-end" remove="justify-content-between" separator=" "/>
         </xpath>
+        <!-- Breadcrumb -->
+        <xpath expr="//t[@t-call='website_sale.products_breadcrumb']/t" position="attributes">
+            <attribute name="t-valuef" add="flex-grow-1" remove="w-100" separator=" "/>
+        </xpath>
         <!-- Move breadcrumb -->
         <xpath expr="//t[@t-call='website_sale.pricelist_list']" position="before">
             <xpath expr="//t[@t-call='website_sale.products_breadcrumb']" position="move"/>
@@ -42,7 +46,8 @@
     <!-- Add link on product card -->
     <template id="products_item" inherit_id="website_sale.products_item" name="Airproof - Products item">
         <xpath expr="//div[hasclass('o_wsale_product_information')]" position="inside" >
-            <span class="small text-dark pt-3 pb-1" >Discover more <img src="/web/image/website_airproof.img_arrow_small" alt="" class="ms-2"/>
+            <span class="small text-dark pt-3 pb-1" >Discover more
+                <img src="/web/image/website_airproof.img_arrow_small" alt="" class="ms-2"/>
             </span>
         </xpath>
     </template>
@@ -59,6 +64,7 @@
         <!-- Change icon "add to cart" -->
         <xpath expr="//*[@id='add_to_cart']/i" position="replace">
             <img src="/web/image/website_airproof.img_shopping" alt="Shopping icon" class="img img-fluid me-1"/>
+            Add to cart
         </xpath>
         <!-- product_attributes_simple - Specification title -->
         <xpath expr="//div[@id='product_attributes_simple']/table" position="before">
@@ -81,7 +87,7 @@
     </template>
 
     <!-- Alternative products in product page -->
-    <template id="alternative_products" inherit_id="website_sale.alternative_products" name="Airproof - Alternative products"> 
+    <template id="alternative_products" inherit_id="website_sale.alternative_products" name="Airproof - Alternative products">
         <!-- Title -->
         <xpath expr="//div[@id='oe_structure_website_sale_recommended_products']" position="before">
             <section class="s_title pt64 pb40 o_colored_level" data-snippet="s_title" data-name="Title" style="background-color: #E6E7E8;" t-if="product.alternative_product_ids">

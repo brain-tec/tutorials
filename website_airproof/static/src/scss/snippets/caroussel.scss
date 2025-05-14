@@ -19,11 +19,11 @@
     }
     .carousel-control-next:after {
         @include o-position-absolute($left: 0);
-        background: o-color('o-color-3') url("/website_airproof/static/src/img/content/icons/arrow-right.svg") no-repeat center;
+        background: o-color('o-color-1') url("/website_airproof/static/src/img/content/icons/arrow-right.svg") no-repeat center;
     }
     .carousel-control-prev:after {
         @include o-position-absolute($right: 0);
-        background: o-color('o-color-3') url("/website_airproof/static/src/img/content/icons/arrow-left.svg") no-repeat center;
+        background: o-color('o-color-1') url("/website_airproof/static/src/img/content/icons/arrow-left.svg") no-repeat center;
     }
     // Dynamic product carousel
     .s_dynamic_snippet_products .dynamic_snippet_template .carousel-item .row > div { padding-top: 0.60rem; }
@@ -62,8 +62,8 @@
             }
         }
         .carousel-control-next:hover:after,
-        .carousel-control-prev:hover:after { 
-            background-color: o-color('o-color-3') !important;
+        .carousel-control-prev:hover:after {
+            background-color: o-color('o-color-1') !important;
         }
     }
 }

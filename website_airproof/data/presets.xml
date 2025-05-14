@@ -9,6 +9,18 @@
     <record id="website.template_header_default" model="ir.ui.view">
         <field name="active" eval="False"/>
     </record>
+    <!-- Disable text element -->
+    <record id="website.header_text_element" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+    <!-- Disable search bar -->
+    <record id="website.header_search_box" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+    <!-- Disable social links -->
+    <record id="website.header_social_links" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
     <!-- Activate language selector -->
     <record id="website.header_language_selector" model="ir.ui.view">
         <field name="active" eval="True"/>

@@ -48,24 +48,19 @@ $o-theme-font-configs: (
 $o-color-palettes: map-merge($o-color-palettes,
     (
         'airproof': (
-            'o-color-1': #000000,
-            'o-color-2': #BBE1FA,
-            'o-color-3': #CEF8A1,
+            'o-color-1': #CEF8A1,
+            'o-color-2': #0B8EE6,
+            'o-color-3': #BBE1FA,
             'o-color-4': #FFFFFF,
-            'o-color-5': #0B8EE6,
+            'o-color-5': #000000,
 
-            'o-cc1-btn-primary': 'o-color-3',
-            'o-cc1-btn-secondary': 'o-color-1',
-            'o-cc2-btn-primary': 'o-color-2',
-            'o-cc3-h2': 'o-color-4',
-            'o-cc3-h3': 'o-color-3',
-            'o-cc3-text': 'o-color-4',
-            'o-cc3-headings': 'o-color-4',
-            'o-cc3-btn-primary': 'o-color-4',
-            'o-cc3-link': 'o-color-4',
-            'o-cc4-link': 'o-color-4',
-
-            'footer': 4,
+            'o-cc1-btn-secondary': 'o-color-5',
+            'o-cc1-link': 'o-color-5',
+            'o-cc2-btn-primary': 'o-color-4',
+            'o-cc2-h2': 'o-color-4',
+            'o-cc3-btn-primary': 'o-color-5',
+            'o-cc5-link': 'o-color-4',
+            'o-cc5-h6': 'o-color-5',
         ),
     )
 );
@@ -77,7 +72,7 @@ $o-bg-shapes: map-merge($o-bg-shapes,
         'illustration': map-merge(
             map-get($o-bg-shapes, 'illustration') or (),
             (
-                'airproof/waves': ('position': left bottom, 'size': 100% auto, 'colors': (3), 'repeat-y': false),
+                'airproof/waves': ('position': left bottom, 'size': 100% auto, 'colors': (1), 'repeat-y': false),
             ),
         ),
     )
