@@ -1,6 +1,6 @@
 import { loadJS } from "@web/core/assets";
 import { getColor } from "@web/core/colors/colors";
-import { Component, onWillStart, useRef, onMounted, onWillUnmount } from "@odoo/owl";
+import { Component, onWillStart, useRef, onMounted, onWillUnmount, onWillDestroy, onPatched } from "@odoo/owl";
 
 export class PieChart extends Component {
     static template = "awesome_dashboard.PieChart";
@@ -13,6 +13,10 @@ export class PieChart extends Component {
         this.canvasRef = useRef("canvas");
         onWillStart(() => loadJS("/web/static/lib/Chart/Chart.js"));
         onMounted(() => {
+            this.renderChart();
+        });
+        onPatched(() => {
+            this.chart.destroy();
             this.renderChart();
         });
         onWillUnmount(() => {
