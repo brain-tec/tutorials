@@ -1,0 +1,12 @@
+<templates xml:space="preserve">
+
+    <t t-name="awesome_clicker.ClickerClientAction">
+        <div class="ms-1 mt-1">
+            <span>Clicks: <t t-esc="this.clicker.state.clicks"/></span>
+            <button class="btn btn-primary ms-1" t-on-click="() => this.clicker.increment(9)">
+                Increment
+            </button>
+        </div>
+    </t>
+
+</templates>
