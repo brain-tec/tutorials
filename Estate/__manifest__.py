@@ -4,5 +4,8 @@
     'application': True,
     'installable': True,
     'category': 'Tutorials',
-    'license': 'AGPL-3'
+    'license': 'AGPL-3',
+    'data': [
+        'security/ir.model.access.csv'
+    ]
 }
