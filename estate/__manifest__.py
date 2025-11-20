@@ -1,11 +1,10 @@
 {
     'name': "Real Estate",
 
-    'summary': """
-        Cool Real Estate App
-    """,
+    'summary': "Cool Real Estate App",
     'description': """
-        Cool Real Estate App
+Cool Real Estate App
+Wow This is a description omgg
     """,
     'author': "kmhma",
     'website': "https://www.odoo.com/",
@@ -17,10 +16,10 @@
 
     'data': [
         "security/ir.model.access.csv",
+        "views/property_type_views.xml",
+        "views/property_tag_views.xml",
         "views/estate_property_views.xml",
-        "views/estate_menus.xml"
+        "views/estate_menus_views.xml",
     ],
-    'assets': {
-    },
-    'license': 'AGPL-3'
+    'license': 'LGPL-3',
 }
