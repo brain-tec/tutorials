@@ -28,6 +28,10 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="Properties">
+            <header>
+                <button name="sell_property" type="object" string="SOLD"/>
+                <button name="cancel_property" type="object" string="CANCEL"/>
+            </header>
                 <sheet>
                     <group>
                         <h1 class="mb32">
@@ -38,16 +42,16 @@
                     <group>
                         <group>
                             <field name="tag_ids" widget="many2many_tags"/>
+                            <field name="state"/>
                             <field name="postcode"/>
-                            <field name="available_from"/>
                             <field name="property_type_id" string="Property Type"/>
                         </group>
 
                         <group>
+                            <field name="available_from"/>
                             <field name="expected_price"/>
                             <field name="best_price"/>
                             <field name="selling_price"/>
-                            <field name="state"/>
                         </group>
                     </group>
 
@@ -71,9 +75,11 @@
                                 <list>
                                     <field name="price"/>
                                     <field name="partner_id"/>
-                                    <field name="status"/>
                                     <field name="validity"/>
                                     <field name="deadline_date"/>
+                                    <button name="accept_offer" string="Accept" type="object" icon="fa-check"/>
+                                    <button name="refuse_offer" string="Refuse" type="object" icon="fa-times"/>
+                                    <field name="status"/>
                                 </list>
                             </field>
                         </page>

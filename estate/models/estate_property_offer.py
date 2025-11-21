@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 
 
 class EstatePropertyOffer(models.Model):
@@ -14,16 +14,50 @@ class EstatePropertyOffer(models.Model):
         ],
     )
     partner_id = fields.Many2one("res.partner", required=True, string="Partner")
-    property_id = fields.Many2one("estate.property", required=True, string="Property")
+    property_id = fields.Many2one(
+        "estate.property", required=True, string="Property", ondelete="cascade"
+    )
     validity = fields.Integer(default=7)
-    deadline_date = fields.Date(compute="_compute_deadline_date", inverse="_inverse_deadline_date")
+    deadline_date = fields.Date(
+        compute="_compute_deadline_date", inverse="_inverse_deadline_date"
+    )
+
+    _postive_price = models.Constraint(
+        "CHECK (price > 0)",
+        "The expected price must be strictly positive"
+    )
 
     @api.depends("create_date", "validity")
     def _compute_deadline_date(self):
         for record in self:
-            record.deadline_date = fields.Date.add((record.create_date or fields.Date.today()), days=record.validity)
-    
+            create_date = record.create_date or fields.Date.today()
+            record.deadline_date = fields.Date.add(create_date, days=record.validity)
+
     def _inverse_deadline_date(self):
         for record in self:
-            record.validity = (record.deadline_date - fields.Date.today()).days
-    
+            create_date = record.create_date or fields.Date.today()
+            record.validity = (record.deadline_date - (create_date.date())).days
+
+    def accept_offer(self):
+        for offer in self:
+            if offer.property_id.state == "sold":
+                raise exceptions.UserError(
+                    f"Property '{offer.property_id.name}' is already sold"
+                )
+            offer.property_id.write(
+                {
+                    "buyer": offer.partner_id,
+                    "selling_price": offer.price,
+                }
+            )
+            offer.status = "accepted"
+        return True
+
+    def refuse_offer(self):
+        for offer in self:
+            if offer.property_id.state == "sold" and offer.status == "accepted":
+                raise exceptions.UserError(
+                    f"Property '{offer.property_id.name}' is already sold to '{offer.partner_id.name}'"
+                )
+            offer.status = "refused"
+        return True
