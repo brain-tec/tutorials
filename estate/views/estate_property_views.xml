@@ -1,16 +1,13 @@
 <?xml version="1.0"?>
 <odoo>
-    <record id="estate_property_view" model="ir.actions.act_window">
-        <field name="name">Estate Property</field>
-        <field name="res_model">estate.property</field>
-        <field name="view_mode">list,form</field>
-    </record>
-
     <record id="estate_list_view" model="ir.ui.view">
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list string="Properties">
+            <list string="Properties" 
+                decoration-bf="state=='offer_accepted'" 
+                decoration-success="state in ['offer_received', 'offer_accepted']"
+                decoration-muted="state=='sold'">
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="property_type_id"/>
@@ -18,7 +15,7 @@
                 <field name="living_area"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
-                <field name="available_from"/>
+                <field name="available_from" optional="hide"/>
             </list>
         </field>
     </record>
@@ -29,8 +26,9 @@
         <field name="arch" type="xml">
             <form string="Properties">
             <header>
-                <button name="sell_property" type="object" string="SOLD"/>
-                <button name="cancel_property" type="object" string="CANCEL"/>
+                <button name="sell_property" type="object" string="SOLD" invisible="state == 'sold' or state == 'cancelled'"/>
+                <button name="cancel_property" type="object" string="CANCEL" invisible="state == 'sold' or state == 'cancelled'"/>
+                <field name="state" widget="statusbar" statusbar_visible="new, offer_received, offer_accepted, sold"/>
             </header>
                 <sheet>
                     <group>
@@ -41,10 +39,9 @@
 
                     <group>
                         <group>
-                            <field name="tag_ids" widget="many2many_tags"/>
-                            <field name="state"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                             <field name="postcode"/>
-                            <field name="property_type_id" string="Property Type"/>
+                            <field name="property_type_id" string="Property Type" options="{'no_create':True}"/>
                         </group>
 
                         <group>
@@ -64,30 +61,38 @@
                                 <field name="facades"/>
                                 <field name="garage"/>
                                 <field name="garden"/>
-                                <field name="garden_area"/>
-                                <field name="garden_orientation"/>
+                                <field name="garden_area" invisible="not garden"/>
+                                <field name="garden_orientation" invisible="not garden"/>
                                 <field name="total_area"/>
                             </group>
                         </page>
 
                         <page string="Offers">
-                            <field name="offer_ids">
-                                <list>
+                            <field name="offer_ids" readonly="state in ['offer_accepted', 'sold', 'cancelled']">
+                                <list editable="bottom" 
+                                    decoration-success="status=='accepted'" 
+                                    decoration-danger="status=='refused'">
                                     <field name="price"/>
                                     <field name="partner_id"/>
                                     <field name="validity"/>
                                     <field name="deadline_date"/>
-                                    <button name="accept_offer" string="Accept" type="object" icon="fa-check"/>
-                                    <button name="refuse_offer" string="Refuse" type="object" icon="fa-times"/>
-                                    <field name="status"/>
+                                    <button name="button_accept_offer"
+                                        string="Accept"
+                                        type="object"
+                                        icon="fa-check"
+                                        invisible="status in ['accepted', 'refused']"/>
+                                    <button name="button_refuse_offer"
+                                        string="Refuse" type="object"
+                                        icon="fa-times"
+                                        invisible="status in ['accepted', 'refused']"/>
                                 </list>
                             </field>
                         </page>
 
                         <page string="Other Info">
                             <group>
-                                <field name="buyer"/>
-                                <field name="salesman"/>
+                                <field name="buyer_id"/>
+                                <field name="salesman_id"/>
                             </group>
                         </page>
                     </notebook>
@@ -105,15 +110,21 @@
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="bedrooms"/>
-                <field name="living_area"/>
+                <field name="living_area" filter_domain="[('living_area', '>=', self)]"/>
                 <field name="expected_price"/>
                 <field name="facades"/>
                 <field name="property_type_id"/>
 
-                <filter string="Available" name="state" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer received')]"/>
-
-                <filter string="Postcode" name="postcode" context="{'group_by':'postcode'}"/>
+                <filter name="available" string="Available" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer received')]"/>
+                <filter name="postcode" string="Postcode" context="{'group_by':'postcode'}"/>
             </search>
         </field>
+    </record>
+
+    <record id="estate_property_view" model="ir.actions.act_window">
+        <field name="name">Estate Property</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_available': True}</field>
     </record>
 </odoo>
