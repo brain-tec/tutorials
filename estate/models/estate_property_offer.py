@@ -62,7 +62,7 @@ class EstatePropertyOffer(models.Model):
                 )
             offer.status = "refused"
         return True
-    
+
     @api.model_create_multi
     def create(self, vals_list):
         for val in vals_list:
