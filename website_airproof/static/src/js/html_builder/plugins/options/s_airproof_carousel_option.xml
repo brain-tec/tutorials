@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="website_airproof.CarouselBubbleOption">
+        <!-- Bubble Design Top Row -->
+        <BuilderRow label.translate="Bubble">
+            Bubble design options.
+        </BuilderRow>
+        <!-- Bubble Shadow Child Row -->
+        <BuilderRow label.translate="Bubble shadow" level="1">
+            <BuilderButtonGroup>
+                <BuilderButton
+                    id="carousel_bubble_blue_opt"
+                    classAction="'x_bubble_blue1'"
+                    label.translate="Blue"
+                    title.translate="Blue"/>
+                <BuilderButton
+                    id="carousel_bubble_green_opt"
+                    classAction="'x_bubble2'"
+                    label.translate="Green"
+                    title.translate="Green"/>
+            </BuilderButtonGroup>
+        </BuilderRow>
+        <!-- Bubble Margin Child Row -->
+        <BuilderRow label.translate="Bubble margin" level="1">
+            <BuilderRange
+                id="carousel_bubble_margin_opt"
+                action="'setBubbleMargin'"
+                max="5"
+                displayRangeValue="true"/>
+        </BuilderRow>
+    </t>
+
+</templates>

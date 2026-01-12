@@ -2,7 +2,7 @@
     'name': 'Airproof Theme',
     'description': 'Airproof Theme - Drones, modelling, camera',
     'category': 'Website/Theme',
-    # 'version': '18.0.1.0',
+    'version': '19.0.1.0',
     'author': 'PSBE Designers',
     'license': 'LGPL-3',
     'depends': ['website_sale', 'website_sale_wishlist', 'website_blog', 'website_mass_mailing'],
@@ -55,6 +55,8 @@
             'website_airproof/static/src/js/html_builder/plugins/options/header/header_template_option.xml',
             'website_airproof/static/src/js/html_builder/plugins/options/footer_template_option.xml',
             'website_airproof/static/src/js/html_builder/plugins/options/mega_menu_option.xml',
+            'website_airproof/static/src/js/html_builder/plugins/options/s_airproof_carousel_option.xml',
+            'website_airproof/static/src/js/html_builder/plugins/options/s_airproof_carousel_option_plugin.js',
         ],
         'html_editor.assets_editor': [
             'website_airproof/static/src/js/html_editor/main/font/color_picker_gradient_tab.js',

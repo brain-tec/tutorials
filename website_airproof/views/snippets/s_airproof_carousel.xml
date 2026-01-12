@@ -91,23 +91,4 @@
             </div>
         </section>
     </template>
-
-    <!-- Add options to snippets -->
-    <template id="snippet_options" inherit_id="website.snippet_options" name="Airproof - Snippets Options">
-        <xpath expr="." position="inside">
-            <div data-selector=".x_bubble_item">
-                <!-- Bubble shadow color -->
-                <we-button-group string="Bubble Shadow">
-                    <we-button data-select-class="x_bubble1">Blue</we-button>
-                    <we-button data-select-class="x_bubble2">Green</we-button>
-                </we-button-group>
-                <!-- Bubble spacing -->
-                <we-range string="Bubble Spacing" data-select-class="mb-1|mb-2|mb-3|mb-4|mb-5"/>
-            </div>
-        </xpath>
-        <xpath expr="//div[@data-js='Box'][@data-selector='section .row > div']" position="attributes">
-            <!-- Disable standard shadow & border for bubbles -->
-            <attribute name="t-attf-data-exclude" add=".x_bubble_item" separator=", "/>
-        </xpath>
-    </template>
 </odoo>
