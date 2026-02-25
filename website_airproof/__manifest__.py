@@ -55,7 +55,7 @@
             "website_airproof/static/src/website_builder/background_shapes.js",
             "website_airproof/static/src/website_builder/color_picker_gradient_tab.js",
             "website_airproof/static/src/website_builder/header_template_option.xml",
-            "website_airproof/static/src/website_builder/footer_template_option.xml",
+            "website_airproof/static/src/website_builder/footer_option_plugin.js",
             "website_airproof/static/src/website_builder/mega_menu_option.xml",
             "website_airproof/static/src/website_builder/airproof_carousel_option.xml",
             "website_airproof/static/src/website_builder/airproof_carousel_option_plugin.js",

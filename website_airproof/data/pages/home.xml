@@ -8,10 +8,12 @@
     <record id="page_home" model="website.page">
         <field name="name">Home</field>
         <field name="is_published" eval="True" />
+        <field name="is_homepage" eval="True" />
         <field name="key">website_airproof.page_home</field>
         <field name="url">/</field>
         <field name="type">qweb</field>
         <field name="header_overlay" eval="True" />
+        <field name="website_id" eval="1" />
         <field name="arch" type="xml">
             <t t-name="website_airproof.page_home">
                 <t t-call="website.layout">
@@ -291,7 +293,9 @@
                                 <div class="row align-items-center">
                                     <div class="col-lg-4 offset-lg-1 pt16 pb16 o_colored_level">
                                         <!-- Image shape -->
-                                        <img src="/web/image/website_airproof.img_drone_flying" class="img img-fluid" alt="Drone flying" />
+                                        <img src="/web/image/website_airproof.img_drone_flying" class="img img-fluid" alt="Drone flying" data-shape="html_builder/geometric/geo_shuriken" data-shape-colors=";;;;" />
+
+                                        <img src="/html_editor/image_shape/website_airproof.img_drone_flying/html_builder/geometric_round/geo_round_square.svg" class="img img-fluid" alt="" data-shape="html_builder/geometric_round/geo_round_square" data-format-mimetype="image/jpeg" data-file-name="drone-flying.svg" data-shape-colors=";;;;" style="width: 100% !important;"/>
                                     </div>
                                     <div class="col-lg-5 offset-lg-1 pt16 pb16 o_colored_level">
                                         <span class="text-o-color-1 text-uppercase">The sky is the limit</span>
