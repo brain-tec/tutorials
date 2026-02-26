@@ -53,6 +53,7 @@
         # Builder Option Plugins
         "website.website_builder_assets": [
             "website_airproof/static/src/website_builder/background_shapes.js",
+            "website_airproof/static/src/website_builder/image_shapes.js",
             "website_airproof/static/src/website_builder/color_picker_gradient_tab.js",
             "website_airproof/static/src/website_builder/header_template_option.xml",
             "website_airproof/static/src/website_builder/footer_option_plugin.js",

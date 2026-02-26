@@ -18,7 +18,7 @@
 
     <!-- Add custom template for dynamic product block -->
     <template id="dynamic_filter_template_product_product_airproof" name="Airproof product template">
-        <t t-foreach="records" t-as="data" data-number-of-elements="4" data-number-of-elements-sm="2">
+        <t t-foreach="records" t-as="data" data-number-of-elements="4" data-number-of-elements-small-devices="2">
             <t t-set="record" t-value="data['_record']" />
             <t t-set="product" t-value="record" />
             <t t-set="product_template_id" t-value="record.id if not record.is_product_variant else record.product_tmpl_id.id" />
