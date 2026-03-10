@@ -1,8 +1,8 @@
 import {Plugin} from "@html_editor/plugin";
 import {_t} from "@web/core/l10n/translation";
 import {registry} from "@web/core/registry";
-export class AirproofImageShapesPlugin extends Plugin {
-    static id = "airproofImageShapes";
+export class AirproofImageShapesOptionPlugin extends Plugin {
+    static id = "airproofImageShapesOption";
     resources = {
         image_shape_groups_providers: () => ({
             airproof: {
@@ -24,4 +24,7 @@ export class AirproofImageShapesPlugin extends Plugin {
     };
 }
 
-registry.category("website-plugins").add(AirproofImageShapesPlugin.id, AirproofImageShapesPlugin);
+registry.category("website-plugins").add(
+    AirproofImageShapesOptionPlugin.id,
+    AirproofImageShapesOptionPlugin
+);

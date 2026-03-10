@@ -2,7 +2,7 @@ import {Plugin} from "@html_editor/plugin";
 import {_t} from "@web/core/l10n/translation";
 import {registry} from "@web/core/registry";
 export class AirproofBackgroundShapesPlugin extends Plugin {
-    static id = "airproofBackgroundShapes";
+    static id = "airproofBackgroundShapesOption";
     resources = {
         background_shape_groups_providers: () => ({
             airproof: {
@@ -22,4 +22,7 @@ export class AirproofBackgroundShapesPlugin extends Plugin {
     };
 }
 
-registry.category("website-plugins").add(AirproofBackgroundShapesPlugin.id, AirproofBackgroundShapesPlugin);
+registry.category("website-plugins").add(
+    AirproofBackgroundShapesPlugin.id,
+    AirproofBackgroundShapesPlugin
+);
