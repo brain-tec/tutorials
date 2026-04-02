@@ -1,6 +1,6 @@
 {
     'name': "Estate",
     'depends': ['base'],
-    'installable': True
-    
+    'installable': True,
+    'application':True
 }
