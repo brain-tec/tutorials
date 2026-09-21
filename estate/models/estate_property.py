@@ -66,7 +66,31 @@ class EstateProperty(models.Model):
     property_maintenance_ids = fields.One2many("property.maintenance", "property_id")
     maintenance_count = fields.Integer(compute="_compute_maintenance_stats")
     has_active_maintenance = fields.Boolean(compute="_compute_maintenance_stats")
-
+    sale_mode = fields.Selection(
+        [
+            ("regular", "Regular"),
+            ("auction", "Auction"),
+        ],
+        string="Sale Mode",
+        default="regular",
+        required=True,
+    )
+    auction_end_time = fields.Datetime(string="End Time")
+    highest_offer = fields.Float(
+        compute="_compute_highest_bid_info", store=True, readonly=True
+    )
+    highest_bidder_id = fields.Many2one(
+        "res.partner", compute="_compute_highest_bid_info", store=True, readonly=True
+    )
+    auction_state = fields.Selection(
+        [
+            ("draft", "Template"),
+            ("blocked", "Auction"),
+            ("done", "Sold"),
+        ],
+        default="draft",
+        string="Auction State",
+    )
     _check_expected_price = models.Constraint(
         "CHECK(expected_price > 0)",
         "A property expected price must be strictly positive.",
@@ -95,6 +119,17 @@ class EstateProperty(models.Model):
             )
             record.maintenance_count = len(active_maintenance)
             record.has_active_maintenance = record.maintenance_count > 0
+
+    @api.depends("offer_ids.price", "offer_ids.partner_id")
+    def _compute_highest_bid_info(self):
+        for record in self:
+            if record.offer_ids:
+                highest_offer_rec = max(record.offer_ids, key=lambda o: o.price)
+                record.highest_offer = highest_offer_rec.price
+                record.highest_bidder_id = highest_offer_rec.partner_id
+            else:
+                record.highest_offer = 0.0
+                record.highest_bidder_id = False
 
     @api.constrains("expected_price", "selling_price")
     def _check_price_difference(self):
@@ -131,11 +166,35 @@ class EstateProperty(models.Model):
                     _("You can only delete properties that are 'New' or 'Cancelled'.")
                 )
 
+    @api.model
+    def _cron_check_auction_end(self):
+        now = fields.Datetime.now()
+        expired_auctions = self.search(
+            [
+                ("sale_mode", "=", "auction"),
+                ("auction_end_time", "<=", now),
+                (
+                    "state",
+                    "in",
+                    [
+                        "new",
+                        "offer_received",
+                    ],
+                ),
+            ]
+        )
+
+        for auction in expired_auctions:
+            if auction.offer_ids:
+                highest_offer = max(auction.offer_ids, key=lambda o: o.price)
+                highest_offer.action_accept()
+
     def action_sold(self):
         self.ensure_one()
         if self.state == "cancelled":
             raise UserError(_("You can not sold a cancelled property."))
         self.state = "sold"
+        self.auction_state = "done"
         return True
 
     def action_cancel(self):
@@ -189,3 +248,21 @@ class EstateProperty(models.Model):
             "view_mode": "form",
             "target": "current",
         }
+
+    def action_start_auction(self):
+        for record in self:
+            if record.sale_mode != "auction":
+                raise UserError(
+                    _("Property must be in Auction sale mode to start an auction.")
+                )
+            if not record.auction_end_time:
+                raise UserError(
+                    _("Please set an End Time before starting the auction.")
+                )
+            if record.auction_end_time <= fields.Datetime.now():
+                raise UserError(
+                    _("The End Time must be set to a future date and time.")
+                )
+
+            record.write({"auction_state": "blocked"})
+        return True

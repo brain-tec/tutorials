@@ -30,6 +30,10 @@ class EstatePropertyOffer(models.Model):
         compute="_compute_date_deadline",
         inverse="_inverse_date_deadline",
     )
+    sale_mode = fields.Selection(
+        related="property_id.sale_mode",
+        string="Sale Mode",
+    )
     _check_validity = models.Constraint(
         "CHECK(validity >= 0)", "Validity days cannot be negative!"
     )

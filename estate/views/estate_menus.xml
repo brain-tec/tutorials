@@ -51,4 +51,12 @@
         name="Request Maintenance"
         parent="estate_property_menu_settings"
         action="property_maintenance_action"/>
+
+    <menuitem
+        id="estate_config_settings_menu"
+        name="Settings"
+        parent="estate_menu_root"
+        action="estate_config_settings_action"
+        sequence="10"/>
+
 </odoo>

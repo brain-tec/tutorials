@@ -6,3 +6,4 @@ from . import property_maintenance
 from . import res_users
 from . import estate_booking
 from . import estate_booking_payment
+from . import res_config_settings

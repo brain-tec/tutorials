@@ -41,6 +41,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button name="action_start_auction" string="Start Auction" type="object" class="oe_highlight" invisible="sale_mode != 'auction' or auction_state != 'draft'"/>
                     <button name="action_cancel" string="Cancel" type="object" invisible="state in ('sold', 'cancelled')"/>
                     <button name="action_best_offer" string="Accept the Best Offer" type="object" class="oe_highlight" invisible="state not in ('new', 'offer_received')"/>
                     <button name="action_view_booking" string="View Booking" type="object" class="oe_highlight" invisible="state not in ('offer_accepted','pending_booking', 'booked', 'sold')"/>
@@ -57,13 +58,19 @@
                         </button>
                     </div>
 
-                    <div class="oe_title">
-                        <h1>
-                            <field name="name" placeholder="Property Name"/>
-                        </h1>
+                    <div class="d-flex justify-content-between align-items-center w-100 mb-2">
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Property Name"/>
+                            </h1>
+                        </div>
+                        <div invisible="sale_mode != 'auction'" class="o_estate_auction_state_selection">
+                            <field name="auction_state" widget="state_selection" options="{'hide_label': false, 'is_toggle_mode': false}"/>
+                        </div>
                     </div>
                     <group>
                         <group>
+                            <field name="sale_mode" widget="radio" options="{'horizontal': true}"/>
                             <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                             <field name="property_type_id" options="{'no_create': True, 'no_edit': True}"/>
                             <field name="postcode"/>
@@ -78,16 +85,23 @@
                     <notebook>
                         <page string="Description">
                             <group>
-                                <field name="description"/>
-                                <field name="bedrooms"/>
-                                <field name="living_area"/>
-                                <field name="facades"/>
-                                <field name="garden"/>
-                                <field name="garage"/>
-                                <field name="garden_area" invisible="garden == False"/>
-                                <field name="garden_orientation" invisible="garden == False"/>
-                                <field name="total_area"/>
-                                <field name="active"/>
+                                <group>
+                                    <field name="description"/>
+                                    <field name="bedrooms"/>
+                                    <field name="living_area"/>
+                                    <field name="facades"/>
+                                    <field name="garden"/>
+                                    <field name="garage"/>
+                                    <field name="garden_area" invisible="garden == False"/>
+                                    <field name="garden_orientation" invisible="garden == False"/>
+                                    <field name="total_area"/>
+                                    <field name="active"/>
+                                </group>
+                                <group string="Auction Details" invisible="sale_mode != 'auction'">
+                                    <field name="auction_end_time"/>
+                                    <field name="highest_offer"/>
+                                    <field name="highest_bidder_id"/>
+                                </group>
                             </group>
                         </page>
                         <page string="Offers">
@@ -128,10 +142,11 @@
                 <progressbar field="state" colors='{"sold": "success", "cancelled": "danger", "new": "info", "offer_received": "warning", "offer_accepted": "success"}'/>
                 <templates>
                     <t t-name="card">
-                        <div>
+                        <div class="d-flex justify-content-between align-items-center">
                             <strong class="o_kanban_record_title">
                                 <field name="name"/>
                             </strong>
+                            <field name="auction_state" widget="state_selection"/>
                         </div>
                         <div class="mt4">
                             Expected Price: <field name="expected_price"/>
