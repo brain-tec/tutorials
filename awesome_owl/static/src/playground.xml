@@ -2,8 +2,46 @@
 <templates xml:space="preserve">
 
     <t t-name="awesome_owl.playground">
-        <div class="p-3">
-            hello world
+        <div class="p-4">
+            <h1 class="mb-4">Owl Tutorial Playground</h1>
+
+            <!-- Counter Section (Exercises 1, 2, 6) -->
+            <div class="mb-4 p-3 border rounded bg-white shadow-sm">
+                <h3>Counters</h3>
+                <div class="d-flex align-items-center gap-3 my-3">
+                    <Counter onChange.bind="incrementSum"/>
+                    <Counter onChange.bind="incrementSum"/>
+                </div>
+                <p class="fs-5 mt-2">
+                    Total sum of counter clicks: <span class="badge bg-secondary"><t t-esc="state.sum"/></span>
+                </p>
+            </div>
+
+            <!-- Card Section (Exercises 3, 4, 5, 13, 14) -->
+            <div class="mb-4 p-3 border rounded bg-white shadow-sm">
+                <h3>Cards</h3>
+                <div class="d-flex flex-wrap gap-2">
+                    <Card title="'Card 1'">
+                        <p class="card-text">This is a standard card body using default slot.</p>
+                    </Card>
+                    <Card title="'Card with Counter'">
+                        <p class="card-text">A Counter component inside Card slot:</p>
+                        <Counter onChange.bind="incrementSum"/>
+                    </Card>
+                    <Card title="'Card with HTML markup'">
+                        <p class="card-text">
+                            Unescaped markup: <t t-out="html"/><br/>
+                            Escaped string: <t t-esc="str"/>
+                        </p>
+                    </Card>
+                </div>
+            </div>
+
+            <!-- TodoList Section (Exercises 7 - 12) -->
+            <div class="mb-4 p-3 border rounded bg-white shadow-sm">
+                <h3>Todo List</h3>
+                <TodoList/>
+            </div>
         </div>
     </t>
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="awesome_owl.TodoList">
+        <div class="todo-list p-3 border rounded bg-white shadow-sm" style="max-width: 400px;">
+            <h5 class="mb-3">Todo List</h5>
+            <input
+                t-ref="input"
+                class="form-control mb-3"
+                type="text"
+                placeholder="Enter a new task"
+                t-on-keyup="addTodo"
+            />
+            <div class="todos-container">
+                <t t-foreach="todos" t-as="todo" t-key="todo.id">
+                    <TodoItem
+                        todo="todo"
+                        toggleState.bind="toggleTodo"
+                        removeTodo.bind="removeTodo"
+                    />
+                </t>
+                <div t-if="!todos.length" class="text-muted text-center py-2">
+                    No tasks yet. Press enter to add one!
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>
